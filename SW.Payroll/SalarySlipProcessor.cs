@@ -10,9 +10,6 @@ namespace SW.Payroll
     {
         private readonly IZoneService zoneService;
 
-        public SalarySlipProcessor(IZoneService zoneService)
-        {
-        }
          
         public decimal CalculateBasicSalary(Employee employee)
         { 
