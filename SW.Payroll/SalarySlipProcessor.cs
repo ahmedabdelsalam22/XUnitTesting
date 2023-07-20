@@ -12,7 +12,6 @@ namespace SW.Payroll
 
         public SalarySlipProcessor(IZoneService zoneService)
         {
-            this.zoneService = zoneService;
         }
          
         public decimal CalculateBasicSalary(Employee employee)
