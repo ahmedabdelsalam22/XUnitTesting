@@ -122,7 +122,6 @@ namespace SW.Payroll
 
             if (employee.WorkPlatform == WorkPlatform.Remote)
                 return 0m;
-
             return Constants.TransportationAllowanceAmount / 2;
         }
 
