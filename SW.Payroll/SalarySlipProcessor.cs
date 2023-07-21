@@ -8,7 +8,7 @@ namespace SW.Payroll
 {
     public class SalarySlipProcessor
     {
-        private readonly IZoneService zoneService;
+       // private readonly IZoneService zoneService;
 
          
         public decimal CalculateBasicSalary(Employee employee)
@@ -80,10 +80,10 @@ namespace SW.Payroll
             if (employee.IsDanger)
                 return Constants.DangerPayAmount; 
             
-            var isDangerZone = zoneService.IsDangerZone(employee.DutyStation);
+          //  var isDangerZone = zoneService.IsDangerZone(employee.DutyStation);
 
-            if (isDangerZone)
-                return Constants.DangerPayAmount;
+            //if (isDangerZone)
+            //    return Constants.DangerPayAmount;
 
             return 0m;
         }
@@ -112,13 +112,18 @@ namespace SW.Payroll
         public decimal CalculateTransportationAllowece(Employee employee)
         {
             if (employee is null)
+            {
                 throw new ArgumentNullException(nameof(employee));
-
+            }
             if (employee.WorkPlatform == WorkPlatform.Office)
+            {
                 return Constants.TransportationAllowanceAmount;
-
+            }
             if (employee.WorkPlatform == WorkPlatform.Remote)
+            {
                 return 0m;
+            }
+
             return Constants.TransportationAllowanceAmount / 2;
         }
 
