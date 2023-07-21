@@ -21,4 +21,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SW.Payroll\SW.Payroll.csproj" />
+  </ItemGroup>
+
 </Project>
