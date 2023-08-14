@@ -1,4 +1,5 @@
 using System;
+using Xunit.Sdk;
 
 namespace SW.Payroll.Tests
 {
@@ -191,6 +192,19 @@ namespace SW.Payroll.Tests
             var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
             var expected = 0m;
             // Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void CalculateDependanciesAllowance_TotalDependanciesBetweenZeroAndFive()
+        {
+            //Arrange
+            var employee = new Employee() { TotalDependancies = 3};
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            //Assert
+            var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
+            var expected = 3 * Constants.DependancyAllowancePerChildAmount;
+            //Assert
             Assert.Equal(expected, actual);
         }
     }
