@@ -18,7 +18,6 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Equal(expected, actual);
         }
-
         [Fact]
         public void CalculateBasicSalary_ForEmployeeNull_ThrowArgumentNullException()
         {
