@@ -167,5 +167,18 @@ namespace SW.Payroll.Tests
             //Assert 
             Assert.Throws<ArgumentOutOfRangeException>(()=> func(employee));
         }
+        [Fact]
+        public void CalculateDependancyAllowance_TotalDependanciesGreaterthanMaxDependantsFactor_ReturnsMaxDependancyAllowanceAmount()
+        {
+            // Arrange
+            var employee = new Employee() { TotalDependancies = 8};
+            // Act 
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+
+            var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
+            var expected = Constants.MaxDependancyAllowanceAmount;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
