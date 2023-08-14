@@ -180,5 +180,18 @@ namespace SW.Payroll.Tests
             // Assert
             Assert.Equal(expected, actual);
         }
+        [Fact]
+        public void CalculateDependancyAllowance_TotalDependanciesEqualZero_Returns0m()
+        {
+            // Arrange
+            var employee = new Employee() { TotalDependancies = 0 };
+            // Act 
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+
+            var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
+            var expected = 0m;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
