@@ -1,9 +1,11 @@
+using System;
+
 namespace SW.Payroll.Tests
 {
     public class SalarySlipProcessorTests
     {
 
-        // Testing from CalculateBasicSalary method
+        //1-Testing from CalculateBasicSalary method
         [Fact]
         public void CalculateBasicSalary_ForEmployeeObject_ReturnsBasicSalary()
         {
@@ -13,6 +15,7 @@ namespace SW.Payroll.Tests
             var employee = new Employee() { Wage = 500m, WorkingDays = 20 };
             //Act
             SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+
             var actual = salarySlipProcessor.CalculateBasicSalary(employee);
             var expected = 10000m;
             //Assert
@@ -34,8 +37,7 @@ namespace SW.Payroll.Tests
             Assert.Throws<ArgumentNullException>(() => fun(employee));
         }
 
-
-        // Testing for CalculateTransportationAllowece method
+        //2-Testing for CalculateTransportationAllowece method
         [Fact]
         public void CalculateTransportationAllowece_ForEmployeeWorkInOffice_ReturnsTransportationAllowece()
         {
@@ -97,7 +99,32 @@ namespace SW.Payroll.Tests
             Assert.Throws<ArgumentNullException>(() => fun(employee));
         }
 
+        //3-Testing for CalculateSpouseAllowance method
+        [Fact]
+        public void CalculateSpouseAllowance_ForEmployeeThatMarried_ReturnSpouseAllowanceAmount()
+        {
+            //Arrange
+            var employee = new Employee() { IsMarried = true };
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
 
+            var actual = salarySlipProcessor.CalculateSpouseAllowance(employee);
+            var expected = Constants.SpouseAllowanceAmount;
+            //Assert
+            Assert.Equal(actual, expected);
+        }
+        [Fact]
+        public void CalculateSpouseAllowance_ForEmployeeThatNotMarried_ReturnSpouseAllowanceAmount()
+        {
+            //Arange
+            var employee = new Employee() { IsMarried = false };
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            var actual = salarySlipProcessor.CalculateSpouseAllowance(employee);
+            var expected = 0m;
+            //Assert
+            Assert.Equal(actual, expected);
+        }
 
     }
 }
