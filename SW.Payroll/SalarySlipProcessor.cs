@@ -43,7 +43,7 @@ namespace SW.Payroll
             {
                 return 0m;
             }
-            else
+            else // employee.TotalDependancies > 0 && employee.TotalDependancies <5
             {
                 return employee.TotalDependancies * Constants.DependancyAllowancePerChildAmount;
             }
