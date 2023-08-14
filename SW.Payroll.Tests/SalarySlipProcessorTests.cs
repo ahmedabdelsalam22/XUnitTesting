@@ -155,6 +155,17 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Throws<ArgumentNullException>(() => func(employee));
         }
+        [Fact]
+        public void CalculateDependancyAllowance_TotalDependanciesLessthanZero_ReturnsArgumentOutOfRangeException()
+        {
+            //Arrange
+            var employee = new Employee() { TotalDependancies = -5 };
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
 
+            Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateDependancyAllowance(employee);
+            //Assert 
+            Assert.Throws<ArgumentOutOfRangeException>(()=> func(employee));
+        }
     }
 }
