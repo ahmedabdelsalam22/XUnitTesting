@@ -125,6 +125,21 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Equal(actual, expected);
         }
+        [Fact]
+        public void CalculateSpouseAllowance_ForEmployeeNull_ThrowArgumentNullException()
+        {
+            //Arrange
+            Employee employee = null;
+            //Act 
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+
+            Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateSpouseAllowance(employee);
+
+            //Assert
+
+            Assert.Throws<ArgumentNullException>(() => func(employee));
+
+        }
 
     }
 }
