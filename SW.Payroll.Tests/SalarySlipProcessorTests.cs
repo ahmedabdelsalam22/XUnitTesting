@@ -141,5 +141,20 @@ namespace SW.Payroll.Tests
 
         }
 
+        //4- Testing for CalculateDependancyAllowance method
+        [Fact]
+        public void CalculateDependancyAllowance_ForEmployeeNull_ThrowArgumentNullException()
+        {
+            //Arrange
+            Employee employee = null;
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+
+            Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateDependancyAllowance(employee);
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(() => func(employee));
+        }
+
     }
 }
