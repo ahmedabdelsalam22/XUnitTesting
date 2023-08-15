@@ -8,9 +8,12 @@ namespace SW.Payroll
 {
     public class SalarySlipProcessor
     {
-        private readonly IZoneService zoneService;
+        private readonly IZoneService _zoneService;
+        public SalarySlipProcessor(IZoneService zoneService)
+        {
+            _zoneService = zoneService;
+        }
 
-         
         public decimal CalculateBasicSalary(Employee employee)
         { 
             if(employee == null)
@@ -80,7 +83,7 @@ namespace SW.Payroll
             if (employee.IsDanger)
                 return Constants.DangerPayAmount;
 
-            bool isDangerZone = zoneService.IsDangerZone(employee.DutyStation);
+            bool isDangerZone = _zoneService.IsDangerZone(employee.DutyStation);
 
             if (isDangerZone)
                 return Constants.DangerPayAmount;

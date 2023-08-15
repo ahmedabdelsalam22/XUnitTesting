@@ -15,7 +15,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { Wage = 500m, WorkingDays = 20 };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             var actual = salarySlipProcessor.CalculateBasicSalary(employee);
             var expected = 10000m;
@@ -30,7 +30,7 @@ namespace SW.Payroll.Tests
             //Arrange
             Employee employee = null;
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             Func<Employee, decimal> fun = (e) => salarySlipProcessor.CalculateBasicSalary(employee);
 
@@ -47,7 +47,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { WorkPlatform = WorkPlatform.Office };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             var actual = salarySlipProcessor.CalculateTransportationAllowece(employee);
             var expected = Constants.TransportationAllowanceAmount;
             //Assert
@@ -62,7 +62,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { WorkPlatform = WorkPlatform.Hybrid };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             var actual = salarySlipProcessor.CalculateTransportationAllowece(employee);
             var expected = Constants.TransportationAllowanceAmount / 2;
             //Assert
@@ -77,7 +77,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { WorkPlatform = WorkPlatform.Remote };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             var actual = salarySlipProcessor.CalculateTransportationAllowece(employee);
             var expected = 0m;
             //Assert
@@ -92,7 +92,7 @@ namespace SW.Payroll.Tests
             //Arrange
             Employee employee = null;
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             Func<Employee, decimal> fun = (e) => salarySlipProcessor.CalculateTransportationAllowece(employee);
 
@@ -107,7 +107,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { IsMarried = true };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             var actual = salarySlipProcessor.CalculateSpouseAllowance(employee);
             var expected = Constants.SpouseAllowanceAmount;
@@ -120,7 +120,7 @@ namespace SW.Payroll.Tests
             //Arange
             var employee = new Employee() { IsMarried = false };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             var actual = salarySlipProcessor.CalculateSpouseAllowance(employee);
             var expected = 0m;
             //Assert
@@ -132,7 +132,7 @@ namespace SW.Payroll.Tests
             //Arrange
             Employee employee = null;
             //Act 
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateSpouseAllowance(employee);
 
@@ -149,7 +149,7 @@ namespace SW.Payroll.Tests
             //Arrange
             Employee employee = null;
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateDependancyAllowance(employee);
 
@@ -162,7 +162,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { TotalDependancies = -5 };
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateDependancyAllowance(employee);
             //Assert 
@@ -174,7 +174,7 @@ namespace SW.Payroll.Tests
             // Arrange
             var employee = new Employee() { TotalDependancies = 8};
             // Act 
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
             var expected = Constants.MaxDependancyAllowanceAmount;
@@ -187,7 +187,7 @@ namespace SW.Payroll.Tests
             // Arrange
             var employee = new Employee() { TotalDependancies = 0 };
             // Act 
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
             var expected = 0m;
@@ -200,7 +200,7 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() { TotalDependancies = 3};
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             //Assert
             var actual = salarySlipProcessor.CalculateDependancyAllowance(employee);
             var expected = 3 * Constants.DependancyAllowancePerChildAmount;
@@ -215,7 +215,7 @@ namespace SW.Payroll.Tests
             //Arrange
             Employee employee = null;
             //Act 
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculatePension(employee);
             //Assert
             Assert.Throws<ArgumentNullException>(()=>func(employee));
@@ -226,24 +226,51 @@ namespace SW.Payroll.Tests
             //Arrange
             var employee = new Employee() {HasPensionPlan = false};
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
             var actual = salarySlipProcessor.CalculatePension(employee);
             var expected = 0m;
             //Assert
             Assert.Equal(actual,expected);
         }
         [Fact]
-        public void CalculatePension_ForEmployeeWhenHasPensionPlanIsTrue_Returns0m()
+        public void CalculatePension_ForEmployeeWhenHasPensionPlanIsTrue_Returns_PensionRate_star_BassicSallary()
         {
             //Arrange
             var employee = new Employee() {HasPensionPlan = true};
             //Act
-            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
 
             var actual = salarySlipProcessor.CalculatePension(employee);
             var expected = Constants.PensionRate * (salarySlipProcessor.CalculateBasicSalary(employee));
             //Assert
             Assert.Equal(actual,expected);
+        }
+
+        //6- Testing for CalculateDangerPay method
+        [Fact]
+        public void CalculateDangerPay_ForEmployeeIsNull_ReturnsArgumentNullException()
+        {
+            //Arrange
+            Employee employee = null;
+            //Act 
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+
+            Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculateDangerPay(employee);
+            //Assert
+            Assert.Throws<ArgumentNullException>(()=>func(employee));
+        }
+        [Fact]
+        public void CalculateDangerPay_WhenIsDangerIsTrue_ReturnsDangerPayAmount()
+        {
+            // Arrange
+            var employee = new Employee() {IsDanger = true};
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+
+            var actual = salarySlipProcessor.CalculateDangerPay(employee);
+            var expected = Constants.DangerPayAmount;
+            //Assert
+            Assert.Equal(expected,actual);
         }
     }
 }
