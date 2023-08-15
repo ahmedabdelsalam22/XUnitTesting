@@ -1,3 +1,4 @@
+using Moq;
 using System;
 using Xunit.Sdk;
 
@@ -271,6 +272,25 @@ namespace SW.Payroll.Tests
             var expected = Constants.DangerPayAmount;
             //Assert
             Assert.Equal(expected,actual);
+        }
+        [Fact]
+        public void CalculateDangerPay_WhenIsDangerZoneIsTrue_ReturnsDangerPayAmount()
+        {
+            // Arrange
+            var employee = new Employee() {IsDanger = false ,DutyStation = "Egypt"};
+            var mock = new Mock<IZoneService>();
+            var setup = mock.Setup(x=>x.IsDangerZone(employee.DutyStation)).Returns(true); // put fake data in IZoneService using Mock
+            //Act
+
+            var zoneService = mock.Object;
+
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(zoneService);
+
+            var actual = salarySlipProcessor.CalculateDangerPay(employee);
+            var expected = Constants.DangerPayAmount;
+            //Assert
+            Assert.Equal(expected,actual);
+
         }
     }
 }
