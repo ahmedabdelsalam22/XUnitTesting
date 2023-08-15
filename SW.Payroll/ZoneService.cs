@@ -2,7 +2,7 @@
 
 namespace SW.Payroll
 {
-    public class ZoneService: IZoneService
+    public class ZoneService : IZoneService
     {
         private static Random random = new Random();
         public bool IsDangerZone(string dutyStation)
