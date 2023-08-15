@@ -207,5 +207,18 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Equal(expected, actual);
         }
+
+        //5- Testing for CalculatePension method
+        [Fact]
+        public void CalculatePension_ForEmployeeIsNull_ReturnsArgumentNullException()
+        {
+            //Arrange
+            Employee employee = null;
+            //Act 
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            Func<Employee, decimal> func = (e) => salarySlipProcessor.CalculatePension(employee);
+            //Assert
+            Assert.Throws<ArgumentNullException>(()=>func(employee));
+        }
     }
 }
