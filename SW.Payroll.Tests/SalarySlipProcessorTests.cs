@@ -220,5 +220,17 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Throws<ArgumentNullException>(()=>func(employee));
         }
+        [Fact]
+        public void CalculatePension_ForEmployeeWhenHasPensionPlanIsFalse_Returns0m()
+        {
+            //Arrange
+            var employee = new Employee() {HasPensionPlan = false};
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor();
+            var actual = salarySlipProcessor.CalculatePension(employee);
+            var expected = 0m;
+            //Assert
+            Assert.Equal(actual,expected);
+        }
     }
 }
