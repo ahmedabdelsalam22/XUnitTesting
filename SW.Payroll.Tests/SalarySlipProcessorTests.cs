@@ -281,7 +281,6 @@ namespace SW.Payroll.Tests
             var mock = new Mock<IZoneService>();
             var setup = mock.Setup(x=>x.IsDangerZone(employee.DutyStation)).Returns(true); // put fake data in IZoneService using Mock
             //Act
-
             var zoneService = mock.Object;
 
             SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(zoneService);
@@ -290,7 +289,6 @@ namespace SW.Payroll.Tests
             var expected = Constants.DangerPayAmount;
             //Assert
             Assert.Equal(expected,actual);
-
         }
     }
 }
