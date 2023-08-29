@@ -335,7 +335,32 @@ namespace SW.Payroll.Tests
             var expected = basicSalary * Constants.HighSalaryTaxFactor;
             //Assert 
             Assert.Equal(expected,actual);
-
+        }
+        [Fact]
+        public void CalculateTax_ForEmployeeObject_WhenBasicSallaryEqualMediumSalaryThreshold_ReturnsBasicSallaryStarHighSalaryTaxFactor()
+        {
+            //Arrange
+            var employee = new Employee() { Wage = 800m, WorkingDays = 25 };
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+            var basicSalary = salarySlipProcessor.CalculateBasicSalary(employee);
+            //Act 
+            var actual = salarySlipProcessor.CalculateTax(employee);
+            var expected = basicSalary * Constants.HighSalaryTaxFactor;
+            //Assert 
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void CalculateTax_ForEmployeeObject_WhenBasicSallaryIsGreaterThanLowSalaryThreshold_ReturnsBasicSallaryStarMediumSalaryTaxFactor()
+        {
+            //Arrange
+            var employee = new Employee() { Wage = 650m, WorkingDays = 25 };
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+            var basicSalary = salarySlipProcessor.CalculateBasicSalary(employee); // 650m * 25 = 16250m
+            //Act 
+            var actual = salarySlipProcessor.CalculateTax(employee);
+            var expected = basicSalary * Constants.MediumSalaryTaxFactor;
+            //Assert 
+            Assert.Equal(expected, actual);
         }
 
     }
