@@ -247,7 +247,7 @@ namespace SW.Payroll.Tests
             Assert.Equal(actual,expected);
         }
 
-        //6- Testing for CalculateDangerPay method
+        //6- Testing Cases for CalculateDangerPay method
         [Fact]
         public void CalculateDangerPay_ForEmployeeIsNull_ReturnsArgumentNullException()
         {
@@ -309,7 +309,7 @@ namespace SW.Payroll.Tests
             Assert.Equal(expected, actual);
         }
 
-        //7- Testing for CalculateTax method
+        //7- Testing Cases for CalculateTax method 
         [Fact]
         public void CalculateTax_ForEmployeeIsNull_ReturnsArgumentNullException()
         {
@@ -372,6 +372,19 @@ namespace SW.Payroll.Tests
             //Act 
             var actual = salarySlipProcessor.CalculateTax(employee);
             var expected = basicSalary * Constants.MediumSalaryTaxFactor;
+            //Assert 
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void CalculateTax_ForEmployeeObject_WhenBasicSallaryIsNotGreaterThanOrEqual_MediumSalaryThreshold_And_LowSalaryThreshold_ReturnsBasicSalaryStarLowSalaryTaxFactor()
+        {
+            //Arrange
+            var employee = new Employee() { Wage = 50m, WorkingDays = 10 };
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+            var basicSalary = salarySlipProcessor.CalculateBasicSalary(employee); // 50m * 10 = 500m
+            //Act 
+            var actual = salarySlipProcessor.CalculateTax(employee);
+            var expected = basicSalary * Constants.LowSalaryTaxFactor;
             //Assert 
             Assert.Equal(expected, actual);
         }
