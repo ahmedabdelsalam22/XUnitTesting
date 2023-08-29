@@ -274,7 +274,7 @@ namespace SW.Payroll.Tests
             Assert.Equal(expected,actual);
         }
         [Fact]
-        public void CalculateDangerPay_WhenIsDangerZoneIsTrue_ReturnsDangerPayAmount()
+        public void CalculateDangerPay_WhenIsDangerIsFalseAndDangerZoneIsTrue_ReturnsDangerPayAmount()
         {
             // Arrange
             var employee = new Employee() {IsDanger = false ,DutyStation = "Egypt"};
@@ -290,5 +290,53 @@ namespace SW.Payroll.Tests
             //Assert
             Assert.Equal(expected,actual);
         }
+        [Fact]
+        public void CalculateDangerPay_WhenIsDangerIsFalseAndIsDangerZoneIsFalse_Returns0m()
+        {
+            // Arrange
+            var employee = new Employee() { IsDanger = false, DutyStation = "Egypt" };
+            var mock = new Mock<IZoneService>();
+            // put fake data in IZoneService using Mock class that comes from Moq Package
+            var setup = mock.Setup(x => x.IsDangerZone(employee.DutyStation)).Returns(false); 
+            //Act
+            var zoneService = mock.Object;
+
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(zoneService);
+
+            var actual = salarySlipProcessor.CalculateDangerPay(employee);
+            var expected = 0m;
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        //7- Testing for CalculateTax method
+        [Fact]
+        public void CalculateTax_ForEmployeeIsNull_ReturnsArgumentNullException()
+        {
+            //AAA
+            //Arrange
+            Employee employee = null;
+            //Act
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+
+            Func<Employee,decimal> func = (e)=> salarySlipProcessor.CalculateTax(employee);
+            //Assert
+            Assert.Throws<ArgumentNullException>(()=>func(employee));
+        }
+        [Fact]
+        public void CalculateTax_ForEmployeeObject_WhenBasicSallaryIsGreaterThanMediumSalaryThreshold_ReturnsBasicSallaryStarHighSalaryTaxFactor()
+        {
+            //Arrange
+            var employee = new Employee() { Wage = 1000m, WorkingDays = 25 };
+            SalarySlipProcessor salarySlipProcessor = new SalarySlipProcessor(null);
+            var basicSalary = salarySlipProcessor.CalculateBasicSalary(employee);
+            //Act 
+            var actual = salarySlipProcessor.CalculateTax(employee);
+            var expected = basicSalary * Constants.HighSalaryTaxFactor;
+            //Assert 
+            Assert.Equal(expected,actual);
+
+        }
+
     }
 }
