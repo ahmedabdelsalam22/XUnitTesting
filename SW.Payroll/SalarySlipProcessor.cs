@@ -65,7 +65,11 @@ namespace SW.Payroll
      
         public decimal CalculateTax(Employee employee)
         {
+            if (employee == null)
+                throw new ArgumentNullException(nameof(employee));
+
             var basicSalary = CalculateBasicSalary(employee);
+
             if (basicSalary >= Constants.MediumSalaryThreshold)
                 return basicSalary * Constants.HighSalaryTaxFactor;
             else if (basicSalary >= Constants.LowSalaryThreshold)
