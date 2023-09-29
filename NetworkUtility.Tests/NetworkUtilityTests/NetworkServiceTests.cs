@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Extensions;
 using SW.Payroll.NetworkUtility;
 using System;
 using System.Collections.Generic;
@@ -63,5 +64,17 @@ namespace SW.Payroll.Tests.NetworkUtilityTests
             actual.Should().Be(expected);
         }
 
+        [Fact]
+        public void NetworkService_LastPingDate_ReturnDate()
+        {
+            //Arrange
+            DateTime expected = DateTime.Now;
+            //Act 
+            DateTime actual = _networkService.LastPingDate();
+            //Assert
+            actual.Should().BeAfter(1.January(2020));
+            actual.Should().BeBefore(1.January(2024));
+
+        }
     }
 }
