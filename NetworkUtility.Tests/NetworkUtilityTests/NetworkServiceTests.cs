@@ -1,5 +1,7 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using FluentAssertions.Extensions;
+using NetworkUtility.NetworkUtility.DNS;
 using SW.Payroll.NetworkUtility;
 using System;
 using System.Collections.Generic;
@@ -12,18 +14,20 @@ namespace SW.Payroll.Tests.NetworkUtilityTests
 {
     public class NetworkServiceTests
     {
-        private NetworkService _networkService;
+        NetworkService _networkService;
+        private readonly IDNS _dNS;
 
         public NetworkServiceTests()
         {
+            _dNS = A.Fake<IDNS>();
             // system under test (SUT)
-            _networkService = new NetworkService();
+           _networkService = new NetworkService(_dNS);
         }
         [Fact]
         public void NetworkService_PingSent_ReturnsString()
         {
             //Arrange
-            // _networkService -- system under test
+            A.CallTo(() => _dNS.SendDNS()).Returns(true);
             string expected = "Ping Sent";
 
             //Act
