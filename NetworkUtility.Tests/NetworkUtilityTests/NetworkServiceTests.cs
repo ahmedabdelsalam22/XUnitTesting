@@ -4,6 +4,7 @@ using SW.Payroll.NetworkUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,5 +77,22 @@ namespace SW.Payroll.Tests.NetworkUtilityTests
             actual.Should().BeBefore(1.January(2024));
 
         }
+        [Fact]
+        public void NetworkService_GetPingOptions_ReturnsPingOptionsObj()
+        {
+            //Arrange
+            PingOptions expected = new PingOptions()
+            {
+                DontFragment = true,
+                Ttl = 1
+            };
+            //Act
+            PingOptions actual = _networkService.GetPingOptions();
+
+            //Assert
+            actual.Should().BeEquivalentTo(expected); //to compare between to object .. use "BeEquivalentTo"
+            //actual.Should().BeOfType<PingOptions>(); // another way to compare objects
+        }
+
     }
 }
