@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTesting.App", "XUnitTesting.App\XUnitTesting.App.csproj", "{89EE23A8-B775-44E1-BC15-E58AC635A672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTesting.App", "XUnitTesting.App\XUnitTesting.App.csproj", "{89EE23A8-B775-44E1-BC15-E58AC635A672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SW.Payroll.Tests", "SW.Payroll.Tests\SW.Payroll.Tests.csproj", "{9A06F8A4-4A7C-46FD-85AA-41CFBEA7DF3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Payroll.Tests", "SW.Payroll.Tests\SW.Payroll.Tests.csproj", "{9A06F8A4-4A7C-46FD-85AA-41CFBEA7DF3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SW.Payroll", "SW.Payroll\SW.Payroll.csproj", "{49F6B54D-8FA8-4FB2-A4C8-E06A9627287A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Payroll", "SW.Payroll\SW.Payroll.csproj", "{49F6B54D-8FA8-4FB2-A4C8-E06A9627287A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

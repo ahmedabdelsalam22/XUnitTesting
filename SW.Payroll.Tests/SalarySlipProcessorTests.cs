@@ -279,7 +279,7 @@ namespace SW.Payroll.Tests
             // Arrange
             var employee = new Employee() {IsDanger = false ,DutyStation = "Egypt"};
             var mock = new Mock<IZoneService>();
-            var setup = mock.Setup(x=>x.IsDangerZone(employee.DutyStation)).Returns(true); // put fake data in IZoneService using Mock
+            mock.Setup(x=>x.IsDangerZone(employee.DutyStation)).Returns(true); // put fake data in IZoneService using Mock
             //Act
             var zoneService = mock.Object;
 
