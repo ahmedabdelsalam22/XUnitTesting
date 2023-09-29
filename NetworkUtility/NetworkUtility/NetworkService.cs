@@ -12,5 +12,9 @@ namespace SW.Payroll.NetworkUtility
         {
             return "Ping Sent";
         }
+        public int PingTimeOut(int x, int y)
+        {
+            return x + y;
+        }
     }
 }
