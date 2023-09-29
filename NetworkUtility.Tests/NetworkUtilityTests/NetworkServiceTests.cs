@@ -33,5 +33,21 @@ namespace SW.Payroll.Tests.NetworkUtilityTests
             actual.Should().Be(expected);
             actual.Should().Contain("Ping", Exactly.Once());
         }
+
+        [Fact]
+
+        public void NetworkService_PingTimeOut_ReturnsInt()
+        {
+            //Arrange
+             
+            int x = 1;
+            int y = 2;
+            //Act 
+            int actual = _networkService.PingTimeOut(x, y);
+            int expected = x + y;
+            //Assert 
+            Assert.Equal(expected, actual);
+            actual.Should().Be(expected);
+        }
     }
 }
