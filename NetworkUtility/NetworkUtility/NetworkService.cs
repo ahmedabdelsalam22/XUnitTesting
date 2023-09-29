@@ -29,5 +29,28 @@ namespace SW.Payroll.NetworkUtility
                 Ttl = 1
             };
         }
+        public IEnumerable<PingOptions> MostRecentPings()
+        {
+            IEnumerable<PingOptions> pingOptions = new List<PingOptions>()
+            {
+                new PingOptions()
+                {
+                    DontFragment = true,
+                    Ttl = 1
+                },
+                new PingOptions()
+                {
+                    DontFragment = false,
+                    Ttl = 2
+                },
+                new PingOptions()
+                {
+                    DontFragment = true,
+                    Ttl = 3
+                },
+            };
+
+            return pingOptions;
+        }
     }
 }
