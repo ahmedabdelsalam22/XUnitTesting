@@ -94,5 +94,34 @@ namespace SW.Payroll.Tests.NetworkUtilityTests
             //actual.Should().BeOfType<PingOptions>(); // another way to compare objects
         }
 
+        [Fact]
+        public void NetworkService_MostRecentPings_ReturnListOfPingOptions()
+        {
+            //Arrange
+            IEnumerable<PingOptions> expected = new List<PingOptions>()
+            {
+                new PingOptions()
+                {
+                    DontFragment = true,
+                    Ttl = 1
+                },
+                new PingOptions()
+                {
+                    DontFragment = false,
+                    Ttl = 2
+                },
+                new PingOptions()
+                {
+                    DontFragment = true,
+                    Ttl = 3
+                },
+            };
+            //Act 
+            IEnumerable<PingOptions> actual = _networkService.MostRecentPings();
+            //Assert
+            actual.Should().BeOfType<List<PingOptions>>();
+            actual.Should().BeEquivalentTo(expected); // to compare two collections
+            actual.Should().Contain(x => x.DontFragment == true);
+        }
     }
 }
