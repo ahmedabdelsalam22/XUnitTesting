@@ -16,5 +16,9 @@ namespace SW.Payroll.NetworkUtility
         {
             return x + y;
         }
+        public DateTime LastPingDate()
+        {
+            return DateTime.Now;
+        }
     }
 }
